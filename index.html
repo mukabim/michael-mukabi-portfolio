@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michael Njenga Mukabi Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Swiper.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <style>
+    :root {
+      --sidebar-bg: #212529;
+      --sidebar-width: 220px;
+      --accent: #00b894;
+      --main-bg: #2d3436;
+      --card-bg: #23272b;
+      --text: #fff;
+      --muted: #b2bec3;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--main-bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      height: 100vh;
+    }
+    aside {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+      z-index: 2;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+    .Links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+    .Links li {
+      list-style: none;
+      padding: 18px 30px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      border-left: 4px solid transparent;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .Links li.activeLink, .Links li:hover {
+      background: rgba(0,184,148,0.08);
+      color: var(--accent);
+      border-left: 4px solid var(--accent);
+    }
+    .Links i {
+      min-width: 22px;
+      text-align: center;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .swiper {
+      width: 900px;
+      max-width: 98vw;
+      height: 600px;
+      max-height: 90vh;
+      border-radius: 18px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+      background: transparent;
+    }
+    .swiper-slide {
+      background: var(--card-bg);
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: 100%;
+      padding: 40px 50px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .slideContent {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding-top: 0;
+    }
+    .slideContent h1, .slideContent h2, .slideContent h3 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+    .slideContent p, .slideContent ul, .slideContent li {
+      color: var(--text);
+      font-size: 1.05rem;
+    }
+    .slideContent ul {
+      padding-left: 18px;
+    }
+    .slideContent li {
+      margin-bottom: 6px;
+    }
+    .skills {
+      margin: 18px 0 28px 0;
+    }
+    .skill-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .skill-label {
+      width: 160px;
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .skill-bar {
+      flex: 1;
+      height: 12px;
+      background: #353b48;
+      border-radius: 8px;
+      margin-left: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 8px;
+      transition: width 1s;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 18px;
+    }
+    .project-card {
+      background: #23272b;
+      border-radius: 12px;
+      padding: 18px 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .project-card h3 {
+      margin: 0 0 4px 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+    .project-card a {
+      color: var(--accent);
+      text-decoration: underline;
+      font-size: 0.98rem;
+    }
+    .contact-info {
+      margin-bottom: 18px;
+    }
+    .contact-info p {
+      margin: 6px 0;
+      color: var(--text);
+    }
+    .contact-info i {
+      color: var(--accent);
+      margin-right: 8px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #353b48;
+      color: var(--text);
+      font-size: 1rem;
+      resize: none;
+    }
+    .contact-form button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover {
+      background: #009e74;
+    }
+    @media (max-width: 1100px) {
+      .swiper {
+        width: 98vw;
+        height: 90vh;
+      }
+      .swiper-slide {
+        padding: 20px 5vw;
+      }
+    }
+    @media (max-width: 700px) {
+      aside {
+        width: 60px;
+        padding-top: 10px;
+      }
+      .Links li {
+        padding: 12px 8px;
+        font-size: 1.1rem;
+        justify-content: center;
+      }
+      .Links li span {
+        display: none;
+      }
+      .swiper {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+      }
+      .swiper-slide {
+        padding: 10px 2vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <ul class="Links">
+      <li class="activeLink" onclick="Navigate(0)"><i class="fa-solid fa-house"></i> <span>Home</span></li>
+      <li onclick="Navigate(1)"><i class="fa-solid fa-user"></i> <span>About Me</span></li>
+      <li onclick="Navigate(2)"><i class="fa-solid fa-pen-ruler"></i> <span>Services</span></li>
+      <li onclick="Navigate(3)"><i class="fa-solid fa-images"></i> <span>Gallery</span></li>
+      <li onclick="Navigate(4)"><i class="fa-solid fa-comments"></i> <span>Contact Me</span></li>
+    </ul>
+  </aside>
+  <main>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <!-- Home -->
+        <div class="swiper-slide">
+          <div class="slideContent">
+            <div style="display:flex;align-items:center;gap:30px;margin-bottom:20px;">
+              <img src="Mikey Prof.png" alt="Michael Njenga Mukabi" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);box-shadow:0 4px 15px rgba(0,184,148,0.3);">
+              <div>
+                <h1>Hi! I'm Michael Njenga Mukabi,<br><span style="font-size:1.3rem;color:var(--accent);font-weight:600;">CRM Specialist & Python Developer</span></h1>
+                <p style="margin-top:10px;color:var(--muted);">
+                  📞 +254710671768 | 📧 mukabim.mm@gmail.com<br>
+                  🔗 <a href="https://www.linkedin.com/in/michaelmukabi/" target="_blank" style="color:var(--accent);">linkedin.com/in/michaelmukabi</a>
+                </p>
+              </div>
+            </div>
+            <p style="margin-top:18px;max-width:500px;">
+              Tech-driven CRM Specialist, Python developer, and systems innovator with 7+ years’ experience in CRM implementation, business process optimization, and custom tech solutions. Proven ability to build and scale software systems that solve real problems — including legal automation and wireless billing — with minimal resources.
+            </p>
+            <div style="margin-top:28px;">
+              <button class="contact-form button" onclick="Navigate(4)" style="margin-right:10px;">Contact Me</button>
+              <button class="contact-form button" onclick="Navigate(1)">About Me</button>
+            </div>
+          </div>
+        </div>
+        <!-- About Me -->
+        <div class="swiper-slide">
+          <div class="slideContent">
+            <h2>About Me</h2>
+            <p>
+              Passionate about transforming workflows through automation, data, and human-centered design. Strong blend of enterprise software knowledge and startup execution.
+            </p>
+            <div class="skills">
+              <div class="skill-row"><span class="skill-label">CRM</span><div class="skill-bar"><div class="skill-bar-fill" style="width: 95%"></div></div></div>
+              <div class="skill-row"><span class="skill-label">Python</span><div class="skill-bar"><div class="skill-bar-fill" style="width: 92%"></div></div></div>
+              <div class="skill-row"><span class="skill-label">JavaScript</span><div class="skill-bar"><div class="skill-bar-fill" style="width: 85%"></div></div></div>
+              <div class="skill-row"><span class="skill-label">SQL/PostgreSQL</span><div class="skill-bar"><div class="skill-bar-fill" style="width: 80%"></div></div></div>
+              <div class="skill-row"><span class="skill-label">React</span><div class="skill-bar"><div class="skill-bar-fill" style="width: 75%"></div></div></div>
+              <div class="skill-row"><span class="skill-label">Design & Media</span><div class="skill-bar"><div class="skill-bar-fill" style="width: 70%"></div></div></div>
+            </div>
+            <ul>
+              <li><strong>CRM:</strong> Microsoft Dynamics 365, Customer Service, Power Platform</li>
+              <li><strong>Programming:</strong> Python, JavaScript, HTML5, CSS3, React</li>
+              <li><strong>Databases:</strong> SQL, PostgreSQL, MongoDB, Microsoft Access</li>
+              <li><strong>Tools & Platforms:</strong> Git, MikroTik API, OCR, Canva, ChatGPT, Vyond</li>
+              <li><strong>Design & Media:</strong> Adobe Photoshop, Illustrator, CorelDRAW</li>
+              <li><strong>Soft Skills:</strong> Leadership, Team Training, Problem Solving, Client Support</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Services -->
+        <div class="swiper-slide">
+          <div class="slideContent">
+            <h2>Services</h2>
+            <div class="projects">
+              <div class="project-card">
+                <h3><i class="fa-solid fa-pen-ruler"></i> LegalTech Automation</h3>
+                <p>Automating legal document processing for Kenyan advocates, saving hours of manual work and integrating with M-Pesa for seamless payments.</p>
+              </div>
+              <div class="project-card">
+                <h3><i class="fa-solid fa-wifi"></i> Network Automation</h3>
+                <p>Automated WiFi billing and user management using Python, MikroTik API, and M-Pesa integration, deployed in live transport hubs.</p>
+              </div>
+              <div class="project-card">
+                <h3><i class="fa-solid fa-database"></i> Database Design</h3>
+                <p>Designing and optimizing SQL, PostgreSQL, and MongoDB databases for scalable business solutions.</p>
+              </div>
+              <div class="project-card">
+                <h3><i class="fa-solid fa-code"></i> Custom Software</h3>
+                <p>Building and scaling custom software systems for business process optimization and automation.</p>
+              </div>
+              <div class="project-card">
+                <h3><i class="fa-solid fa-users"></i> CRM Implementation</h3>
+                <p>Implementing and customizing Microsoft Dynamics 365 and Power Platform for enterprise and SMB clients.</p>
+              </div>
+              <div class="project-card">
+                <h3><i class="fa-solid fa-chalkboard-user"></i> Training & Support</h3>
+                <p>Team training, client support, and leadership for successful technology adoption and workflow transformation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Gallery -->
+        <div class="swiper-slide">
+          <div class="slideContent">
+            <h2>Gallery / Projects</h2>
+            <div class="projects">
+              <div class="project-card">
+                <h3>Tenthlining (2024–Present)</h3>
+                <p>Founder & Developer – <a href="https://tenthlining.com" target="_blank">tenthlining.com</a></p>
+                <p>LegalTech SaaS | Python, OCR, PDF, Web Deployment | Mpesa Integration</p>
+                <p>Built an automated tool that transforms how Kenyan advocates process appeal documents. Supports large PDFs (up to 5000+ pages), saves hours of manual work, and integrates with M-Pesa. Led branding, marketing, customer onboarding, and outreach — currently targeting 10,000+ advocates.</p>
+              </div>
+              <div class="project-card">
+                <h3>Airrumi WiFi Billing System (2023–Present)</h3>
+                <p>Builder – Network Automation | Python + MikroTik API + M-Pesa Integration</p>
+                <p>Developed an automated hotspot system that bills and disconnects users based on data/time. Supports real-time payments using M-Pesa STK Push; deployed in a live transport hub.</p>
+                <p><a href="https://www.airrumi.online" target="_blank" style="color:var(--accent);">🔗 www.airrumi.online</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Contact Me -->
+        <div class="swiper-slide">
+          <div class="slideContent">
+            <h2>Contact Me</h2>
+            <div class="contact-info">
+              <p><i class="fa-solid fa-phone"></i> +254710671768</p>
+              <p><i class="fa-regular fa-envelope"></i> mukabim.mm@gmail.com</p>
+              <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/michaelmukabi/" target="_blank">linkedin.com/in/michaelmukabi</a></p>
+              <p><i class="fa-solid fa-globe"></i> <a href="https://tenthlining.com" target="_blank">tenthlining.com</a></p>
+              <p><i class="fa-solid fa-wifi"></i> <a href="https://www.airrumi.online" target="_blank">www.airrumi.online</a></p>
+            </div>
+            <form class="contact-form" action="https://formspree.io/f/xayzqjqr" method="POST">
+              <input type="text" name="name" placeholder="Name" required>
+              <input type="email" name="email" placeholder="Email" required>
+              <textarea name="message" rows="4" placeholder="Type your message here..." required></textarea>
+              <button type="submit">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Swiper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper', {
+      effect: 'cube',
+      grabCursor: false,
+      allowTouchMove: false,
+      cubeEffect: {
+        shadow: true,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94,
+      },
+      speed: 900,
+      mousewheel: true,
+    });
+    function Navigate(indx) {
+      // Sidebar active state
+      document.querySelectorAll('.Links li').forEach((li, i) => {
+        if (i === indx) li.classList.add('activeLink');
+        else li.classList.remove('activeLink');
+      });
+      swiper.slideTo(indx, 900, true);
+    }
+    // Keyboard navigation (optional)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') {
+        Navigate(Math.min(swiper.activeIndex + 1, 4));
+      } else if (e.key === 'ArrowLeft') {
+        Navigate(Math.max(swiper.activeIndex - 1, 0));
+      }
+    });
+  </script>
+</body>
+</html> 
